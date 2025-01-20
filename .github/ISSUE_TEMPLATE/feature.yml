@@ -1,0 +1,38 @@
+name: Feature Request / Enhancement
+description: Suggest a new feature or feature enhancement for the project.
+labels: ['needs triage', 'new feature']
+body:
+  - type: markdown
+    attributes:
+      value: '## :sparkles: Feature Request :sparkles:'
+  - type: markdown
+    attributes:
+      value: |
+        * Ask questions in [![Discord](https://img.shields.io/discord/1097720481970397356?label=Discord&logo=discord&logoColor=white&style=plastic&color=5865f2)](https://discord.gg/vfXjyuKZ).
+        * Check to make sure someone hasn't already opened a [similar request](https://github.com/Josh-XT/AGiXT/issues).
+  - type: textarea
+    id: problem
+    attributes:
+      label: 'Feature/Improvement Description'
+      description: 'Describe the feature you need, where and why'
+      placeholder: 'I often work at night and find the bright interface hard on my eyes. Please add a dark mode to the frontend I can activate in the settings.'
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: 'Proposed Solution'
+      description: 'Describe the solution you would like to see.'
+      placeholder: 'In the settings, there should be a button. On the top right, there should be a switch. The color palette should be...'
+    validations:
+      required: true
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: 'Acknowledgements'
+      description: 'Please confirm the following:'
+      options:
+        - label: 'I have searched the existing issues to make sure this feature has not been requested yet.'
+          required: true
+        - label: 'I have provided enough information for everyone to understand why this feature request is needed in AGiXT.'
+          required: true
