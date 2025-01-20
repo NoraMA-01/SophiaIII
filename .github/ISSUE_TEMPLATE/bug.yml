@@ -1,0 +1,49 @@
+name: Bug Report
+description: File a bug report to help us improve the project.
+labels: ['type | report | bug', 'needs triage']
+body:
+  - type: markdown
+    attributes:
+      value: '## :beetle: Bug Report :beetle:'
+  - type: markdown
+    attributes:
+      value: 
+        * Before you file an issue read the [Contributing guide](./CONTRIBUTING.md).
+  - type: textarea
+    id: description
+    attributes:
+      label: 'Description'
+      description: 'Please provide a clear and concise description of what is happening and how to reproduce the issue if possible.'
+      placeholder: |
+        When I click the '...' button, the page refreshes instead of showing a confirmation message.
+    validations:
+      required: true
+  - type: checkboxes
+    id: os
+    attributes:
+      label: 'Operating System'
+      description: 'Select the operating system(s) on which you experienced this bug.'
+      options:
+        - label: 'Linux'
+        - label: 'Windows'
+        - label: 'MacOS'
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: 'Acknowledgements'
+      description: 'Please confirm the following before submitting an issue:'
+      options:
+        - label: 'I am NOT trying to use localhost for providers running outside of the docker container.'
+          required: true
+        - label: 'I am NOT trying to run SOPHIAIII outside of docker, the only supported method to run it.'
+          required: true
+        - label: 'Python 3.10.X is installed and the version in use on the host machine.'
+          required: true
+        - label: 'The latest version of Docker is installed and running on the host machine.'
+          required: true
+        - label: 'I am using the latest stable version of SOPHIAIII.'
+          required: true
+        - label: 'I have provided enough information for the maintainers to reproduce and diagnose the issue.'
+          required: true
+        - label: 'I have searched the existing issues to make sure this bug has not been reported yet.'
+          required: true
