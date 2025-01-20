@@ -1,0 +1,92 @@
+services:
+  sophia_iii:
+    image: norama01/sophia_iii:latest
+    init: true
+    environment:
+      DATABASE_TYPE: ${DATABASE_TYPE:-sqlite}
+      DATABASE_NAME: ${DATABASE_NAME:-models/sophia_iii}
+      UVICORN_WORKERS: ${UVICORN_WORKERS:-10}
+      SOPHIA_III_API_KEY: ${SOPHIA_III_API_KEY:-None}
+      SOPHIA_III_URI: ${SOPHIA_III_URI:-http://sophia_iii:7437}
+      MAGIC_LINK_URL: ${AUTH_WEB:-http://localhost:3437/user}
+      DISABLED_EXTENSIONS: ${DISABLED_EXTENSIONS}
+      DISABLED_PROVIDERS: ${DISABLED_PROVIDERS}
+      WORKING_DIRECTORY: ${WORKING_DIRECTORY:-/sophia_iii/WORKSPACE}
+      REGISTRATION_DISABLED: ${REGISTRATION_DISABLED:-false}
+      TOKENIZERS_PARALLELISM: "false"
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      AWS_CLIENT_ID: ${AWS_CLIENT_ID}
+      AWS_CLIENT_SECRET: ${AWS_CLIENT_SECRET}
+      AWS_REGION: ${AWS_REGION}
+      AWS_USER_POOL_ID: ${AWS_USER_POOL_ID}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET}
+      STORAGE_BACKEND: ${STORAGE_BACKEND:-local}
+      STORAGE_CONTAINER: ${STORAGE_CONTAINER:-sophia_iii-workspace}
+      B2_KEY_ID: ${B2_KEY_ID:-}
+      B2_APPLICATION_KEY: ${B2_APPLICATION_KEY:-}
+      B2_REGION: ${B2_REGION:-us-west-002}
+      S3_BUCKET: ${S3_BUCKET:-sophia_iii-workspace}
+      S3_ENDPOINT: ${S3_ENDPOINT:-http://minio:9000}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-minioadmin}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-minioadmin}
+      AWS_STORAGE_REGION: ${AWS_STORAGE_REGION:-us-east-1}
+      AZURE_STORAGE_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME:-}
+      AZURE_STORAGE_KEY: ${AZURE_STORAGE_KEY:-}
+      GRAPHIQL: ${GRAPHIQL:-true}
+      TZ: ${TZ:-America/New_York}
+    ports:
+      - "${SOPHIA_III_PORT:-7437}:7437"
+    volumes:
+      - ./models:/sophia_iii/models
+      - ./WORKSPACE:/sophia_iii/WORKSPACE
+      - ./sophia_iii/agents:/sophia_iii/agents
+      - ./sophia_iii/prompts:/sophia_iii/prompts
+      - ./sophia_iii/chains:/sophia_iii/chains
+      - ./sophia_iii/memories:/sophia_iii/memories
+      - ./sophia_iii/registration_requirements.json:/sophia_iii/registration_requirements.json
+      - /var/run/docker.sock:/var/run/docker.sock
+  sophia_iii_interactive:
+    image: norama01/sophia_iii-interactive:latest
+    init: true
+    environment:
+      NEXT_TELEMETRY_DISABLED: 1
+      SOPHIA_III_AGENT: ${SOPHIA_III_AGENT:-gpt4free}
+      SOPHIA_III_FILE_UPLOAD_ENABLED: ${SOPHIA_III_FILE_UPLOAD_ENABLED:-true}
+      SOPHIA_III_VOICE_INPUT_ENABLED: ${SOPHIA_III_VOICE_INPUT_ENABLED:-true}
+      SOPHIA_III_FOOTER_MESSAGE: ${SOPHIA_III_FOOTER_MESSAGE:-Powered by Sophia III}
+      SOPHIA_III_REQUIRE_API_KEY: ${SOPHIA_III_REQUIRE_API_KEY:-false}
+      SOPHIA_III_RLHF: ${SOPHIA_III_RLHF:-true}
+      SOPHIA_III_ALLOW_MESSAGE_EDITING: ${SOPHIA_III_ALLOW_MESSAGE_EDITING:-true}
+      SOPHIA_III_ALLOW_MESSAGE_DELETION: ${SOPHIA_III_ALLOW_MESSAGE_DELETION:-true}
+      SOPHIA_III_SHOW_OVERRIDE_SWITCHES: ${SOPHIA_III_SHOW_OVERRIDE_SWITCHES:-tts,websearch,analyze-user-input}
+      SOPHIA_III_SHOW_CHAT_THEME_TOGGLES: ${SOPHIA_III_SHOW_CHAT_THEME_TOGGLES}
+      SOPHIA_III_SERVER: ${SOPHIA_III_URI:-http://localhost:7437}
+      SOPHIA_III_SHOW_AGENT_BAR: ${SOPHIA_III_SHOW_AGENT_BAR:-true}
+      SOPHIA_III_SHOW_APP_BAR: ${SOPHIA_III_SHOW_APP_BAR:-true}
+      SOPHIA_III_SHOW_SELECTION: ${SOPHIA_III_SHOW_SELECTION:-conversation,agent}
+      SOPHIA_III_CONVERSATION_MODE: ${SOPHIA_III_CONVERSATION_MODE:-select}
+      APP_DESCRIPTION: ${APP_DESCRIPTION:-A chat powered by Sophia III.}
+      INTERACTIVE_MODE: ${INTERACTIVE_MODE:-chat}
+      APP_NAME: ${APP_NAME:-Sophia III}
+      APP_URI: ${APP_URI:-http://localhost:3437}
+      AUTH_WEB: ${AUTH_WEB:-http://localhost:3437/user}
+      LOG_VERBOSITY_SERVER: 3
+      THEME_NAME: ${THEME_NAME}
+      ALLOW_EMAIL_SIGN_IN: ${ALLOW_EMAIL_SIGN_IN:-true}
+      AWS_CLIENT_ID: ${AWS_CLIENT_ID}
+      AWS_REGION: ${AWS_REGION}
+      AWS_USER_POOL_ID: ${AWS_USER_POOL_ID}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID}
+      TZ: ${TZ:-America/New_York}
+    ports:
+      - "${SOPHIA_III_INTERACTIVE_PORT:-3437}:3437"
+    restart: unless-stopped
+    volumes:
+      - ./node_modules:/app/node_modules
