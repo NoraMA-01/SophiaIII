@@ -1,0 +1,110 @@
+services:
+  sophiaiii:
+    image: norama01/sophiaiii:main
+    init: true
+    environment:
+      DATABASE_TYPE: ${DATABASE_TYPE:-sqlite}
+      DATABASE_NAME: ${DATABASE_NAME:-models/sophiaiii}
+      UVICORN_WORKERS: ${UVICORN_WORKERS:-10}
+      SOPHIAIII_API_KEY: ${SOPHIAIII_API_KEY:-None}
+      SOPHIAIII_URI: ${SOPHIAIII_URI:-http://sophiaiii:7437}
+      MAGIC_LINK_URL: ${AUTH_WEB:-http://localhost:3437/user}
+      DISABLED_EXTENSIONS: ${DISABLED_EXTENSIONS}
+      DISABLED_PROVIDERS: ${DISABLED_PROVIDERS}
+      WORKING_DIRECTORY: ${WORKING_DIRECTORY:-/sophiaiii/WORKSPACE}
+      REGISTRATION_DISABLED: ${REGISTRATION_DISABLED:-false}
+      TOKENIZERS_PARALLELISM: "false"
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      AWS_CLIENT_ID: ${AWS_CLIENT_ID}
+      AWS_CLIENT_SECRET: ${AWS_CLIENT_SECRET}
+      AWS_REGION: ${AWS_REGION}
+      AWS_USER_POOL_ID: ${AWS_USER_POOL_ID}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET}
+      STORAGE_BACKEND: ${STORAGE_BACKEND:-local}
+      STORAGE_CONTAINER: ${STORAGE_CONTAINER:-sophiaiii-workspace}
+      B2_KEY_ID: ${B2_KEY_ID:-}
+      B2_APPLICATION_KEY: ${B2_APPLICATION_KEY:-}
+      B2_REGION: ${B2_REGION:-us-west-002}
+      S3_BUCKET: ${S3_BUCKET:-sophiaiii-workspace}
+      S3_ENDPOINT: ${S3_ENDPOINT:-http://minio:9000}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-minioadmin}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-minioadmin}
+      AWS_STORAGE_REGION: ${AWS_STORAGE_REGION:-us-east-1}
+      AZURE_STORAGE_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME:-}
+      AZURE_STORAGE_KEY: ${AZURE_STORAGE_KEY:-}
+      GRAPHIQL: ${GRAPHIQL:-true}
+      TZ: ${TZ:-America/New_York}
+    ports:
+      - "${SOPHIAIII_PORT:-7437}:7437"
+    volumes:
+      - ./models:/sophiaiii/models
+      - ./WORKSPACE:/sophiaiii/WORKSPACE
+      - ./sophiaiii/agents:/sophiaiii/agents
+      - ./sophiaiii/prompts:/sophiaiii/prompts
+      - ./sophiaiii/chains:/sophiaiii/chains
+      - ./sophiaiii/memories:/sophiaiii/memories
+      - ./sophiaiii/registration_requirements.json:/sophiaiii/registration_requirements.json
+      - /var/run/docker.sock:/var/run/docker.sock
+  streamlit:
+    image: norama01/streamlit:main
+    depends_on:
+      - sophiaiii
+    environment:
+      SOPHIAIII_URI: ${STREAMLIT_SOPHIAIII_URI:-http://sophiaiii:7437}
+      APP_URI: ${STREAMLIT_APP_URI:-http://localhost:8501}
+      AWS_CLIENT_ID: ${AWS_CLIENT_ID}
+      AWS_REGION: ${AWS_REGION}
+      AWS_USER_POOL_ID: ${AWS_USER_POOL_ID}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID}
+      TZ: ${TZ:-America/New_York}
+    volumes:
+      - ./WORKSPACE:/app/WORKSPACE
+    ports:
+      - "${SOPHIAIII_STREAMLIT_PORT:-8501}:8501"
+  norama01interactive:
+    image: norama01/norama01-interactive:main
+    init: true
+    environment:
+      NEXT_TELEMETRY_DISABLED: 1
+      SOPHIAIII_AGENT: ${SOPHIAIII_AGENT:-gpt4free}
+      SOPHIAIII_FILE_UPLOAD_ENABLED: ${SOPHIAIII_FILE_UPLOAD_ENABLED:-true}
+      SOPHIAIII_VOICE_INPUT_ENABLED: ${SOPHIAIII_VOICE_INPUT_ENABLED:-true}
+      SOPHIAIII_FOOTER_MESSAGE: ${SOPHIAIII_FOOTER_MESSAGE:-Powered by Sophia III}
+      SOPHIAIII_REQUIRE_API_KEY: ${SOPHIAIII_REQUIRE_API_KEY:-false}
+      SOPHIAIII_RLHF: ${SOPHIAIII_RLHF:-true}
+      SOPHIAIII_ALLOW_MESSAGE_EDITING: ${SOPHIAIII_ALLOW_MESSAGE_EDITING:-true}
+      SOPHIAIII_ALLOW_MESSAGE_DELETION: ${SOPHIAIII_ALLOW_MESSAGE_DELETION:-true}
+      SOPHIAIII_SHOW_OVERRIDE_SWITCHES: ${SOPHIAIII_SHOW_OVERRIDE_SWITCHES:-tts,websearch,analyze-user-input}
+      SOPHIAIII_SHOW_CHAT_THEME_TOGGLES: ${SOPHIAIII_SHOW_CHAT_THEME_TOGGLES}
+      SOPHIAIII_SERVER: ${SOPHIAIII_URI:-http://localhost:7437}
+      SOPHIAIII_SHOW_AGENT_BAR: ${SOPHIAIII_SHOW_AGENT_BAR:-true}
+      SOPHIAIII_SHOW_APP_BAR: ${SOPHIAIII_SHOW_APP_BAR:-true}
+      SOPHIAIII_SHOW_SELECTION: ${SOPHIAIII_SHOW_SELECTION:-conversation,agent}
+      SOPHIAIII_CONVERSATION_MODE: ${SOPHIAIII_CONVERSATION_MODE:-select}
+      APP_DESCRIPTION: ${APP_DESCRIPTION:-A chat powered by Sophia III.}
+      INTERACTIVE_MODE: ${INTERACTIVE_MODE:-chat}
+      APP_NAME: ${APP_NAME:-Sophia III}
+      APP_URI: ${APP_URI:-http://localhost:3437}
+      AUTH_WEB: ${AUTH_WEB:-http://localhost:3437/user}
+      LOG_VERBOSITY_SERVER: 3
+      THEME_NAME: ${THEME_NAME}
+      ALLOW_EMAIL_SIGN_IN: ${ALLOW_EMAIL_SIGN_IN:-true}
+      AWS_CLIENT_ID: ${AWS_CLIENT_ID}
+      AWS_REGION: ${AWS_REGION}
+      AWS_USER_POOL_ID: ${AWS_USER_POOL_ID}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID}
+      TZ: ${TZ:-America/New_York}
+    ports:
+      - "${SOPHIAIII_INTERACTIVE_PORT:-3437}:3437"
+    restart: unless-stopped
+    volumes:
+      - ./node_modules:/app/node_modules
