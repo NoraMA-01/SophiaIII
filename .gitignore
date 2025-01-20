@@ -1,0 +1,53 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+.env
+env/
+.venv
+*venv/
+session.txt
+.vscode/
+.idea/
+agents/*
+models/*
+llama.cpp
+node_modules
+memories/*
+WORKSPACE/*
+*.util.py
+frontend/
+Agent-LLM-Frontend/
+*.code-workspace
+src/
+conversations/
+# probably mounted data
+sophiaIII/agents/*
+sophiaIII/data/*
+sophiaIII/WORKSPACE/*
+sophiaIII/models/*
+sophiaIII/conversations
+sophiaIII/.github
+sophiaIII/prompts/private
+sophiaIII/agents
+sophiaIII/LICENSE
+sophiaIII/README.md
+sophiaIII/hub_main.zip
+sophiaIII/*_main.zip
+# docs generation
+_book/
+streamlit/
+# 3rd party
+package.json
+package-lock.json
+*cookies.json
+data/
+agents/
+memories/
+text-generation-webui/
+# testing
+**/.ipynb_checkpoints/
+test.ipynb
+responses.json
+noraMA-01.yml
+ezlocalai
