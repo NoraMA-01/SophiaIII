@@ -1,0 +1,10 @@
+data/
+_book/
+.git/
+docker/
+agixt/models/
+streamlit/
+examples/
+models/
+streamlit/
+text-generation-webui/
