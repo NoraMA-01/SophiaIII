@@ -1,2 +1,2 @@
-# NoraMA-01
+# Nora MA-01
 Smart agents for a smarter world
