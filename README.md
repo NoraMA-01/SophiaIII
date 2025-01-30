@@ -168,6 +168,6 @@ Sophia III is an **evolutionary AI agent framework** that brings together **auto
 By enabling **multi-agent collaboration, real-time learning, and robust security**, Sophia III is poised to become the **next-generation AI orchestration system** for both personal and enterprise applications.  
 
 📢 **Join the Open-Source Community**  
-🔗 GitHub: [https://github.com/Nora-MA-01/Sophia-III](https://github.com/Nora-MA-01/Sophia-III)  
+🔗 GitHub: [https://github.com/Nora-MA-01/Sophia-III]([https://github.com/NoraMA-01/SophiaIII])  
 
 Would you like to refine any sections or add more details? 😊
