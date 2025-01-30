@@ -7,9 +7,7 @@ Nora MA-01
 
 [![Logo](https://github.com/NoraMA-01/SophiaIII/blob/main/docs/images/SOPHIA.PNG)](https://github.com/NoraMA-01/SophiaIII)
 
-Here's a **comprehensive whitepaper** for **Sophia III**, covering its **vision, architecture, implementation, use cases, and future developments** in detail.  
 
----
 
 # **Sophia III: A Decentralized AI Orchestration Framework for Intelligent Automation**  
 
