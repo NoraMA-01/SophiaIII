@@ -5,13 +5,11 @@ Nora MA-01
 [![GitHub](https://img.shields.io/badge/GitHub-Sponsor%20NoraMA%2001-blue?logo=github&style=plastic)](https://github.com/NoraMA-01)
 
 
-[![Logo](https://github.com/NoraMA-01/SophiaIII/blob/main/docs/images/SOPHIA.PNG)](https://github.com/NoraMA-01/SophiaIII)
-
+![Image](https://github.com/user-attachments/assets/e01cc2b5-0d40-49df-93cd-cfc25b9a642e)
 
 
 # **Sophia III: A Decentralized AI Orchestration Framework for Intelligent Automation**  
 
-### **Version 1.0 
 
 ## **Abstract**  
 Sophia III is an open-source, AI-powered orchestration framework designed for **intelligent automation, multi-agent collaboration, and adaptive decision-making**. It provides a **flexible, modular infrastructure** that integrates cutting-edge **language models (LLMs), reinforcement learning (RLHF), and secure API frameworks** to facilitate real-time interaction and execution of tasks across diverse domains.  
@@ -168,4 +166,4 @@ By enabling **multi-agent collaboration, real-time learning, and robust security
 📢 **Join the Open-Source Community**  
 🔗 GitHub: [https://github.com/NoraMA-01/SophiaIII](https://github.com/NoraMA-01/SophiaIII) 
 
-Would you like to refine any sections or add more details? 😊
+![Image](https://github.com/user-attachments/assets/d2749553-aea2-48a9-bc9a-538aa798ff2b)
