@@ -35,7 +35,7 @@ import os
 import re
 
 
-class AGiXT:
+class Sophia:
     def __init__(
         self,
         user: str,
